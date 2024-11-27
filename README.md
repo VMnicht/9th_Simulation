@@ -1,5 +1,6 @@
 # rc25 gazebo & rviz & ros_controller
-本项目使用 catkin build 构建
+本项目使用 catkin build 构建  
+基于林科潭的环境
 这里是3个包，请先在你的工作空间目录下创建src目录
 然后cd src/
 git clone 本项目
@@ -36,8 +37,11 @@ git clone git@github.com:KetenBieber/rc25_description.git
 cd ..
 rosdepc install --from-paths . --ignore-src
 catkin build
-mon launch rc_gazebo rc2025_gazebo.launch
-mon launch load_tf_tree.launch
-mon launch load_basketball_field_map.launch
+mon launch rc_gazebo sim_launch.launch
+mon launch rc_gazeb load_tf_tree.launch
+mon launch rc_gazeb load_basketball_field_map.launch
 
 ```
+仿真需要的消息包在对应机器人的sim_action_data下，输出速度为世界坐标系下的。  
+机器人速度控制话题还是机器人命名空间下的cmd_vel,输出速度的时候记得根据包里的yaw信息处理一下输出速度。  
+使用的是自定义的消息包SimData,在rc_msgs包里。包中的ID没有赋值。
