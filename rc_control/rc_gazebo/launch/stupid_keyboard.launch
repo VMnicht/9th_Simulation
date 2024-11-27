@@ -1,0 +1,6 @@
+<launch>
+
+        <node name="keyboard_ctrl" pkg="rc_gazebo" type = "keyboard_ctrl" output="screen" launch-prefix="gnome-terminal --"/>
+        <node name="keyboard_info" pkg="rc_gazebo" type = "keyboard_info_plus" output="screen" launch-prefix="gnome-terminal --"/>
+
+</launch>
