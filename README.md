@@ -1,6 +1,6 @@
 # rc25 gazebo & rviz & ros_controller
 本项目使用 catkin build 构建  
-基于林科潭的环境
+基于林科潭的环境  
 这里是3个包，请先在你的工作空间目录下创建src目录
 然后cd src/
 git clone 本项目
