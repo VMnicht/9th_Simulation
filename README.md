@@ -40,3 +40,8 @@ mon launch rc_gazebo load_tf_tree.launch
 mon launch rc_gazebo load_basketball_field_map.launch
 
 ```
+需要的数据包在每个机器人命名空间下的sim_action_data话题下。
+发布的速度为世界坐标系下的速度。
+控制速度的话题是每个机器人命名空间下的cmd_vel,为机器人坐标系下的速度。
+发布速度时记得对着包里的角度信息变换一下。
+自定义了一个包SimData,在rc_msg下。
