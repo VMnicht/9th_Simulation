@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="court">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="2.91095563302197E-07 0.966124538143455 -3.44816316444229E-07"
+        rpy="0 0 0" />
+      <mass
+        value="477.295792337381" />
+      <inertia
+        ixx="2938.17789408674"
+        ixy="0.000112508512213997"
+        ixz="9.900662018206E-07"
+        iyy="10305.5699694725"
+        iyz="-0.000127967874139483"
+        izz="7441.25688644035" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rc_gazebo/models/court/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rc_gazebo/models/court/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>
