@@ -17,6 +17,7 @@ find_package(catkin REQUIRED
         rc_common
         gazebo_ros
         gazebo_ros_control
+
         )
 
 # Depend on system install of Gazebo
@@ -147,6 +148,16 @@ add_executable(sim_action_data
   )
 add_dependencies(sim_action_data ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
   target_link_libraries(sim_action_data
+  ${catkin_LIBRARIES} 
+)
+
+add_executable(joy_ctrl
+
+  control/joy_ctrl.cpp
+  
+  )
+add_dependencies(joy_ctrl ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+  target_link_libraries(joy_ctrl
   ${catkin_LIBRARIES} 
 )
 
