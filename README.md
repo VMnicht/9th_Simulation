@@ -38,13 +38,13 @@ cd ..
 rosdepc install --from-paths . --ignore-src
 catkin build
 mon launch rc_gazebo sim_launch.launch
-mon launch rc_gazeb load_tf_tree.launch
-mon launch rc_gazeb load_basketball_field_map.launch
+mon launch rc_gazebo load_tf_tree.launch
+mon launch rc_gazebo load_basketball_field_map.launch
 
 ```  
 如果需要手柄控制
 ```shell
-mon launch rc_gazeb joy_contrl.launch
+mon launch rc_gazebo joy_contrl.launch
 ```  
   
 仿真需要的消息包在对应机器人命名空间的sim_action_data下，输出速度为世界坐标系下的。  
