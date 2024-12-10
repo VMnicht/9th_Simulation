@@ -1,19 +1,28 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
-
+#include <cmath>
 
 int ctrl_robot = 1;
 geometry_msgs::Twist joy_vel;
 void JOY_Data_Callback(const sensor_msgs::Joy::ConstPtr& msg, const std::string& output_topic,ros::NodeHandle& nh) {
     static int last_buttonX = 0,last_buttonY [[maybe_unused]] = 0,last_buttonA = 0,
-    last_buttonB [[maybe_unused]] = 0,last_buttonLB [[maybe_unused]] = 0,last_buttonRB [[maybe_unused]] = 0,speed=10;
+    last_buttonB [[maybe_unused]] = 0,last_buttonLB [[maybe_unused]] = 0,last_buttonRB [[maybe_unused]] = 0;
+    static int speed = 2;
     static ros::Time last_time_A(0,0),last_time_X(0,0);
     int buttonA = msg->buttons[0],buttonB = msg->buttons[1],buttonX = msg->buttons[2]
         ,buttonY [[maybe_unused]] = msg->buttons[3],buttonLB [[maybe_unused]] = msg->buttons[4],buttonRB [[maybe_unused]] = msg->buttons[5];
-    joy_vel.linear.x = msg->axes[1]*speed;
-    joy_vel.linear.y = msg->axes[0]*speed;
+    float vc=sqrt(msg->axes[1]*speed*msg->axes[1]*speed
+            +msg->axes[0]*speed*msg->axes[0]*speed);
+    if(vc>(1.5)){
+        joy_vel.linear.x = msg->axes[1]*speed*1.5/vc;
+        joy_vel.linear.y = msg->axes[0]*speed*1.5/vc;
+    }else{
+        joy_vel.linear.x = msg->axes[1]*speed;
+        joy_vel.linear.y = msg->axes[0]*speed;
+    }
     joy_vel.angular.z = msg->axes[3]*speed;
+
     if(buttonA == 1 && last_buttonA == 0
         && (ros::Time::now()-last_time_A).toSec()>0.4){
         ctrl_robot ++;
@@ -29,18 +38,19 @@ void JOY_Data_Callback(const sensor_msgs::Joy::ConstPtr& msg, const std::string&
     }
     if(buttonX == 1 && last_buttonX == 0 
     && (ros::Time::now()-last_time_X).toSec()>0.4){
+        printf("换档！");
         switch (speed)
         {
-        case 10:
-            speed = 15;
+        case 2:
+            speed = 3;
             printf("切换至高速！\n");
             break;
-        case 15:
-            speed = 5;
+        case 3:
+            speed = 1;
             printf("切换至低速！\n");
             break;
-        case 5:
-            speed = 10;
+        case 1:
+            speed = 2;
             printf("切换至中速！\n");
             break;
         
@@ -56,9 +66,9 @@ void JOY_Data_Callback(const sensor_msgs::Joy::ConstPtr& msg, const std::string&
 
 int main(int argc, char **argv) {
     // 初始化ROS节点
-    ros::init(argc, argv,"joy_ctrl");
+    ros::init(argc, argv,"my_joy_ctrl");
     // 订阅输入的topic
-    std::string input_topic = "joy";
+    std::string input_topic = "/joy";
     // 创建发布者到新的topic
     std::string output_topic = "cmd_vel";
 
@@ -68,7 +78,7 @@ int main(int argc, char **argv) {
     ros::Publisher pub3 = nh.advertise<geometry_msgs::Twist>("/robot3/"+output_topic, 10);
     ros::Publisher pub4 = nh.advertise<geometry_msgs::Twist>("/robot4/"+output_topic, 10);
     ros::Rate loop_rate(50);
-    ros::Subscriber sub = nh.subscribe<sensor_msgs::Joy>(input_topic, 10, std::bind(JOY_Data_Callback, std::placeholders::_1, output_topic, nh));
+    ros::Subscriber sub = nh.subscribe<sensor_msgs::Joy>("joy", 10, std::bind(JOY_Data_Callback, std::placeholders::_1, output_topic, nh));
 
     printf("手柄控制机器人： \n");
     printf("左摇杆 - 线速度控制 \n");
@@ -98,8 +108,8 @@ int main(int argc, char **argv) {
                 printf("机器人%d不存在！\n",ctrl_robot);
                 break;
             }
-            loop_rate.sleep();
+        loop_rate.sleep();
     }
-
+    printf("退出！\n");
     return 0;
 }

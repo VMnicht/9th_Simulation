@@ -9,7 +9,7 @@ void keyboard_callback(const std_msgs::String::ConstPtr& msg);
 geometry_msgs::Twist base_cmd;
 static float linear_vel = 0.1;
 static float angular_vel = 0.1;
-static int k_vel = 80;
+static int k_vel = 30;
 int ctrl_robot = 1;
 int exit_flag = 0;
 int loop_cntx = 0,loop_cnty = 0,loop_cntw = 0;

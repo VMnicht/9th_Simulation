@@ -1,8 +1,8 @@
 <launch>
-    <include file="$(find rc_gazebo)/launch/rc2025_gazebo.launch">
-    </include>
-    <node name="acc_test" pkg="rc_gazebo" type="acc_test"/>
-    <group ns="robot1">
+    <include file="$(find rc_gazebo)/launch/rc2025_gazebo.launch"/>
+    <!-- <node name="acc_test" pkg="rc_gazebo" type="acc_test"/> -->
+    <node name="matlab_acc" pkg="rc_gazebo" type="matlab_acc"/>
+    <!-- <group ns="robot1">
         <node name="sim_action_data_r1" pkg="rc_gazebo" type = "sim_action_data"/>
     </group>
     <group ns="robot2">
@@ -13,6 +13,6 @@
     </group>
     <group ns="robot4">
         <node name="sim_action_data_r4" pkg="rc_gazebo" type = "sim_action_data"/>
-    </group>
+    </group> -->
 
 </launch>

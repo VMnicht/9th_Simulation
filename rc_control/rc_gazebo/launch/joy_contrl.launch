@@ -1,4 +1,5 @@
 
 <launch>
-    <node name="joy_ctrl" pkg="rc_gazebo" type = "joy_ctrl" output="screen" launch-prefix="gnome-terminal --"/>
+    <node name="joy" pkg="joy" type = "joy_node"/>  
+    <node name="my_joy_ctrl" pkg="rc_gazebo" type = "joy_ctrl" output="screen" launch-prefix="gnome-terminal --"/>
 </launch>

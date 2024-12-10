@@ -13,9 +13,9 @@ int main(int argc, char** argv){
     ros::Publisher cmd_pub_r4 = nh.advertise<rc_msgs::ChassisCmd>("robot4/chassis_controller/cmd_chassis", 10);
     ros::Rate rate(50);
     rc_msgs::ChassisCmd cmd;
-    cmd.accel.linear.x = 10;
-    cmd.accel.linear.y = 10;
-    cmd.accel.angular.z = 10;
+    cmd.accel.linear.x = 1.5;
+    cmd.accel.linear.y = 1.5;
+    cmd.accel.angular.z = 2;
 
     while(ros::ok()){
         cmd_pub_r1.publish(cmd);

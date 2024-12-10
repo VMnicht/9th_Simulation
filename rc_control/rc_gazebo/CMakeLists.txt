@@ -17,6 +17,7 @@ find_package(catkin REQUIRED
         rc_common
         gazebo_ros
         gazebo_ros_control
+        joy
 
         )
 
@@ -115,10 +116,26 @@ target_link_libraries(acc_test
   ${catkin_LIBRARIES}
   # 其他你需要的系统或第三方库
 )
+add_dependencies(acc_test ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+  target_link_libraries(acc_test
+  ${catkin_LIBRARIES} 
+)
 
 install(TARGETS acc_test
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
+
+add_executable(matlab_acc
+
+  control/matlab_acc.cpp
+  
+  )
+  
+add_dependencies(matlab_acc ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+  target_link_libraries(matlab_acc
+  ${catkin_LIBRARIES} 
+)
+
 
 add_executable(keyboard_ctrl
 

@@ -13,7 +13,7 @@
     <!-- 加载参数 -->
     <!-- 定义第一个机器人并加载 -->
     <group ns="robot1">
-        <arg name="robot_type" default="$(env ROBOT_TYPE_1)" doc="Type of robot1 [rabbit, elephant, rc_r2]" />
+        <arg name="robot_type" default="$(env ROBOT_TYPE_2)" doc="Type of robot1 [rabbit, elephant, rc_r2]" />
         <arg name="robot_namespace" value="robot1" />
         <include file="$(find rc_gazebo)/launch/spawn_robot.launch">
             <arg name="robot_type" value="$(arg robot_type)" />
@@ -55,7 +55,7 @@
 
     <!-- 定义第三个机器人 -->
     <group ns="robot3">
-        <arg name="robot_type" default="$(env ROBOT_TYPE_3)" doc="Type of robot3 [rabbit, elephant, rc_r2]" />
+        <arg name="robot_type" default="$(env ROBOT_TYPE_4)" doc="Type of robot3 [rabbit, elephant, rc_r2]" />
         <arg name="robot_namespace" value="robot3" />
         <include file="$(find rc_gazebo)/launch/spawn_robot.launch">
             <arg name="robot_type" value="$(arg robot_type)" />
@@ -64,7 +64,7 @@
             <arg name="x" value="5.5" />
             <arg name="y" value="0.2" />
             <arg name="z" value="0.5" />
-            <arg name="yaw" value="3.14" />
+            <arg name="yaw" value="0" />
             <arg name="use_sim" value="true" />
         </include>
         
@@ -83,10 +83,10 @@
             <arg name="robot_type" value="$(arg robot_type)" />
             <arg name="robot_namespace" value="robot4" />
             <arg name="base_color" value="Blue" /> 
-            <arg name="x" value="3.5" />
+            <arg name="x" value="20" />
             <arg name="y" value="0.2" />
             <arg name="z" value="0.5" />
-            <arg name="yaw" value="3.14" />
+            <arg name="yaw" value="0" />
             <arg name="use_sim" value="true" />
         </include>
         <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
@@ -96,4 +96,11 @@
         </node>
     </group> 
     
+    <!-- 发布坐标关系 -->
+     <include file="$(find rc_gazebo)/launch/load_tf_tree.launch"/>
+
+     <!-- 启动rviz，并且加载栅格地图 -->
+      <include file="$(find rc_gazebo)/launch/load_basketball_field_map.launch"/>
+      <param name="use_sim_time" value="true" />
+
 </launch>
