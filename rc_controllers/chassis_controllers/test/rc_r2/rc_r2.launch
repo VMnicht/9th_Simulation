@@ -15,8 +15,8 @@
             chassis_controller
             action_controller
             joint_state_controller">
-            <!-- <param name="robot_namespace" value="$(arg robot_namespace)" />
-            <rosparam file="$(find chassis_controllers)/test/rc_r2/rc_r2.yaml" /> -->
+            <!-- <param name="robot_namespace" value="$(arg robot_namespace)" /> -->
+            <!-- <rosparam file="$(find chassis_controllers)/test/rc_r2/rc_r2.yaml" /> -->
         </node>
     <!-- </group> -->
     <!-- <group ns="$(arg robot_namespace)">
