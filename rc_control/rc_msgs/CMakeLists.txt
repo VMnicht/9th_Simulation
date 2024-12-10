@@ -17,7 +17,7 @@ add_message_files(
         ActionData.msg
         ChassisCmd.msg
         IbusData.msg
-        SimData.msg#9th Sim
+        SimData.msg
 )
 
 add_service_files(
